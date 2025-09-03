@@ -1,0 +1,107 @@
+{
+  "info": {
+    "name": "HiyasuApp Adalo API",
+    "_postman_id": "a52e6d77-6f69-4aa0-8b54-20250903",
+    "description": "Login / Products / Health endpoints for Adalo integration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Ping",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/Api/HealthPing.ashx",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "Api",
+            "HealthPing.ashx"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Health DB",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/Api/HealthDb.ashx",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "Api",
+            "HealthDb.ashx"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\":\"test@example.com\",\"password\":\"123456\"}"
+        },
+        "url": {
+          "raw": "{{base}}/Api/Login.ashx",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "Api",
+            "Login.ashx"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base}}/Api/Products.ashx?keyword=碗&page=1&pageSize=20",
+          "host": [
+            "{{base}}"
+          ],
+          "path": [
+            "Api",
+            "Products.ashx"
+          ],
+          "query": [
+            {
+              "key": "keyword",
+              "value": "碗"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "pageSize",
+              "value": "20"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base",
+      "value": "https://your-domain"
+    }
+  ]
+}

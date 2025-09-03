@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <title>Adalo API 測試頁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","Helvetica Neue",Arial;margin:20px}
+    .box{border:1px solid #ddd;padding:12px;border-radius:8px;margin-bottom:16px}
+    input,button{font-size:16px;padding:8px;margin:4px}
+    pre{white-space:pre-wrap;word-break:break-all;background:#111;color:#eee;padding:12px;border-radius:8px}
+  </style>
+</head>
+<body>
+  <h1>Adalo API 測試頁</h1>
+  <div class="box">
+    <h3>健康檢查</h3>
+    <button onclick="fetchJson('Api/HealthPing.ashx')">Ping</button>
+    <button onclick="fetchJson('Api/HealthDb.ashx')">DB</button>
+  </div>
+  <div class="box">
+    <h3>登入測試</h3>
+    <input id="email" placeholder="Email">
+    <input id="pwd" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+  <div class="box">
+    <h3>商品查詢</h3>
+    <input id="kw" placeholder="關鍵字">
+    <button onclick="products()">查詢</button>
+  </div>
+  <pre id="out"></pre>
+  <script>
+    async function fetchJson(url, opts = {}){
+      const res = await fetch(url, Object.assign({method:'GET'}, opts));
+      const txt = await res.text();
+      document.getElementById('out').textContent = url + "\\n" + txt;
+    }
+    function login(){
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('pwd').value;
+      fetchJson('Api/Login.ashx', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, password})});
+    }
+    function products(){
+      const kw = document.getElementById('kw').value;
+      fetchJson('Api/Products.ashx?keyword=' + encodeURIComponent(kw));
+    }
+  </script>
+</body>
+</html>
